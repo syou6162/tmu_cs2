@@ -10,17 +10,24 @@ class TestPredict(unittest.TestCase):
         with open("data/train.pickle", mode="rb") as f:
             self.train_data = pickle.load(f)["features"]
         trainer = Trainer()
-        trainer.train(self.train_data)
+        self.n_components = 3
+        trainer.train(self.train_data, n_components=self.n_components)
         trainer.save(self.model_filename)
 
     def test_predict(self):
         predictor = Predictor()
         predictor.load(self.model_filename)
         result = predictor.predict([1, 2, 3])
-
-        assert result["is_anomaly"] is False
+        # assert result["is_anomaly"] is False
         assert result["is_error"] is False
-        assert result["score"] == 0.0
         assert result["message"] is None
 
     # 様々な入力ケースに対してテストを書いていきましょう
+    def test_predict_with_insufficient_data(self):
+        predictor = Predictor()
+        predictor.load(self.model_filename)
+        result = predictor.predict([])
+        assert result["is_anomaly"] is False
+        assert result['is_error'] is True
+        assert result["score"] is None
+        assert result["message"] == f'number of features (0) does not match trained model ({self.n_components})'
