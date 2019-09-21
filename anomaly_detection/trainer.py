@@ -35,7 +35,7 @@ class Trainer(object):
         elif len(data) <= n_components:
             raise SmallTrainingDataError(data, n_components)
 
-        self.model = GaussianMixture(n_components=n_components)
+        self.model = GaussianMixture(n_components=n_components, random_state=42)
         self.model.fit(data)
 
     def save(self, filename):
