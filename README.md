@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/syou6162/tmu_cs2.svg?style=shield)](https://circleci.com/gh/syou6162/tmu_cs2)
+[![CircleCI](https://circleci.com/gh/syou6162/tmu_cs2.svg?style=shield)](https://circleci.com/gh/vieirask/tmu_cs2)
 
 # 首都大学東京 情報科学特論2
 吉田が担当した分の講義資料です。
