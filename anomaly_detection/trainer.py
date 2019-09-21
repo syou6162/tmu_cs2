@@ -14,6 +14,17 @@ class InsufficientTrainingDataError(Exception):
         return "InsufficientTrainingDataError"
 
 
+class SmallTrainingDataError(Exception):
+    def __init__(self, data, n_components) -> None:
+        message = (
+            f"Number of training data ({len(data)} examples) is smaller than n_components ({n_components}) of model"
+        )
+        super(Exception, self).__init__(message)
+
+    def error_type(self):
+        return "SmallTrainingDataError"
+
+
 class Trainer(object):
     def __init__(self):
         self.model = None
@@ -21,6 +32,8 @@ class Trainer(object):
     def train(self, data, n_components=1):
         if len(data) == 0:
             raise InsufficientTrainingDataError(data)
+        elif len(data) <= n_components:
+            raise SmallTrainingDataError(data, n_components)
 
         self.model = GaussianMixture(n_components=n_components)
         self.model.fit(data)
@@ -28,3 +41,4 @@ class Trainer(object):
     def save(self, filename):
         with open(filename, mode="wb") as f:
             pickle.dump(self.model, f)
+
