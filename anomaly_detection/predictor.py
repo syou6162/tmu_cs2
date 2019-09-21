@@ -27,7 +27,7 @@ class Predictor(object):
         with open(filename, mode="rb") as f:
             self.trainer = pickle.load(f)
 
-    def predict(self, features, threshold=0.5):
+    def predict(self, features, threshold=0.001):
         # trainerを使って賢く分類するようにしましょう
         if len(features) != self.trainer.means_.shape[1]:
             self.is_error = True

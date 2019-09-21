@@ -27,7 +27,7 @@ def predict():
     content = request.json
 
     predictor = Predictor()
-    # predict.load("model_file.bin")
+    predictor.load("model_file.bin")
     result = predictor.predict(content["features"])
     return make_json_response(result)
 
