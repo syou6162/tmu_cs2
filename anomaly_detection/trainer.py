@@ -41,3 +41,11 @@ class Trainer(object):
     def save(self, filename):
         with open(filename, mode="wb") as f:
             pickle.dump(self.model, f)
+
+
+if __name__ == '__main__':
+    import sys
+    trainer = Trainer()
+    data = pickle.load(open(sys.argv[1], mode="rb"))["features"]
+    trainer.train(data)
+    trainer.save("model_file.bin")
