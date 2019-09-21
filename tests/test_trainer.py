@@ -1,6 +1,6 @@
 import unittest
 import pickle
-from anomaly_detection.trainer import Trainer, InsufficientTrainingDataError
+from anomaly_detection.trainer import Trainer, InsufficientTrainingDataError, SmallTrainingDataError
 
 
 class TestTrainer(unittest.TestCase):
@@ -20,5 +20,6 @@ class TestTrainer(unittest.TestCase):
 
     def test_train_with_small_data(self):
         trainer = Trainer()
-        trainer.train([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]])
-        trainer.save("tmp.model")
+        with self.assertRaises(SmallTrainingDataError):
+            trainer.train([[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]], n_components=3)
+
