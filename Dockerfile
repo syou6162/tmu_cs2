@@ -6,6 +6,7 @@ WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt -c constraints.txt
 
-RUN python anomaly_detection/trainer.py data/train.pickleweb.py
+RUN make download-kdd-data
+RUN python /app/anomaly_detection/trainer.py /app/data/train.pickle
 
 CMD ["/bin/bash"]
