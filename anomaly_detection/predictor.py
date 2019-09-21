@@ -10,8 +10,14 @@ class PredictionResult(dict):
 
 
 class Predictor(object):
-    def __init__(self) -> None:
-        self.trainer = None
+    def __init__(self, trainer=None) -> None:
+        self.trainer = trainer
+        self.is_anomaly = False
+        self.is_error = False
+        self.message = None
+        self.score = None
+
+    def init_result(self):
         self.is_anomaly = False
         self.is_error = False
         self.message = None
