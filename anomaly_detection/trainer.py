@@ -18,10 +18,11 @@ class Trainer(object):
     def __init__(self):
         self.model = None
 
-    def train(self, data):
+    def train(self, data, n_components=1):
         if len(data) == 0:
             raise InsufficientTrainingDataError(data)
-        self.model = GaussianMixture(n_components=1)
+
+        self.model = GaussianMixture(n_components=n_components)
         self.model.fit(data)
 
     def save(self, filename):
