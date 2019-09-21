@@ -41,4 +41,3 @@ class Trainer(object):
     def save(self, filename):
         with open(filename, mode="wb") as f:
             pickle.dump(self.model, f)
-
